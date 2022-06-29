@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RoundedTrapezoid: Shape {
+public struct RoundedTrapezoid: Shape {
     private let topEdgeRatio: Double
     private let cornerOffset: Double
     private let topLineOffset: Double
@@ -27,7 +27,7 @@ struct RoundedTrapezoid: Shape {
         self.insetAmount = inset
     }
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         Path.roundedTrapezoid(in: rect,
                               topEdgeRatio: self.topEdgeRatio,
                               topLineOffset: self.topLineOffset,
