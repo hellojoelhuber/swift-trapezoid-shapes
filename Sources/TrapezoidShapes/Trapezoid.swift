@@ -6,13 +6,13 @@ struct Trapezoid: Shape {
     private let topLineOffset: Double
     private let insetAmount: CGFloat
     
-    init() {
+    public init() {
         self.topEdgeRatio = 0.65
         self.topLineOffset = 0
         self.insetAmount = 0.0
     }
     
-    init(edgeRatio: Double, lineOffset: Double = 0) {
+    public init(edgeRatio: Double, lineOffset: Double = 0) {
         self.topEdgeRatio = edgeRatio
         self.topLineOffset = lineOffset
         self.insetAmount = 0.0

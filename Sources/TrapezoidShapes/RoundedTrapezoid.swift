@@ -6,14 +6,14 @@ struct RoundedTrapezoid: Shape {
     private let topLineOffset: Double
     private let insetAmount: CGFloat
     
-    init() {
+    public init() {
         self.topEdgeRatio = 0.65
         self.cornerOffset = 10
         self.topLineOffset = 0
         self.insetAmount = 0.0
     }
     
-    init(cornerOffset: Double, edgeRatio: Double, lineOffset: Double = 0) {
+    public init(cornerOffset: Double, edgeRatio: Double, lineOffset: Double = 0) {
         self.cornerOffset = cornerOffset
         self.topEdgeRatio = edgeRatio
         self.topLineOffset = lineOffset
