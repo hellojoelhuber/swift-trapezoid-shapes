@@ -2,9 +2,9 @@
 import SwiftUI
 
 public struct Trapezoid: Shape {
-    private let flexibleEdgeRatio: Double
-    private let flexibleEdge: FlexibleEdge
-    private let flexibleEdgeOffset: Double
+    let flexibleEdgeRatio: Double
+    let flexibleEdge: FlexibleEdge
+    let flexibleEdgeOffset: Double
     private let insetAmount: CGFloat
     
     public init() {

@@ -1,11 +1,11 @@
-//import XCTest
-//@testable import TrapezoidShapes
-//
-//final class TrapezoidShapesTests: XCTestCase {
-//    func testExample() throws {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct
-//        // results.
-//        XCTAssertEqual(TrapezoidShapes().text, "Hello, World!")
-//    }
-//}
+import XCTest
+@testable import TrapezoidShapes
+
+final class TrapezoidShapesTests: XCTestCase {
+    func test_RoundedTrapezoid_init() throws {
+        XCTAssertEqual(RoundedTrapezoid().cornerOffset, 10)
+        XCTAssertEqual(RoundedTrapezoid().flexibleEdgeRatio, 0.65)
+        XCTAssertEqual(RoundedTrapezoid().flexibleEdge, .top)
+        XCTAssertEqual(RoundedTrapezoid().flexibleEdgeOffset, 0)
+    }
+}
