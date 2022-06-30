@@ -3,7 +3,7 @@ import SwiftUI
 
 public struct Trapezoid: Shape {
     private let flexibleEdgeRatio: Double
-    private let flexibleEdge: FlexibleSide
+    private let flexibleEdge: FlexibleEdge
     private let flexibleEdgeOffset: Double
     private let insetAmount: CGFloat
     
@@ -14,14 +14,14 @@ public struct Trapezoid: Shape {
         self.insetAmount = 0.0
     }
     
-    public init(edgeRatio: Double, flexibleEdge: FlexibleSide = .top, lineOffset: Double = 0) {
+    public init(edgeRatio: Double, flexibleEdge: FlexibleEdge = .top, lineOffset: Double = 0) {
         self.flexibleEdgeRatio = edgeRatio
         self.flexibleEdge = flexibleEdge
         self.flexibleEdgeOffset = lineOffset
         self.insetAmount = 0.0
     }
     
-    init(edgeRatio: Double, flexibleEdge: FlexibleSide = .top, lineOffset: Double = 0, inset: CGFloat = 0.0) {
+    init(edgeRatio: Double, flexibleEdge: FlexibleEdge = .top, lineOffset: Double = 0, inset: CGFloat = 0.0) {
         self.flexibleEdgeRatio = edgeRatio
         self.flexibleEdge = flexibleEdge
         self.flexibleEdgeOffset = lineOffset
@@ -50,7 +50,7 @@ public struct Trapezoid: Shape {
     }
     
     
-    public enum FlexibleSide {
+    public enum FlexibleEdge {
         case top
         case right
         case bottom

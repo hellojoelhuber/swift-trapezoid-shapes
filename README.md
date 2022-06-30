@@ -12,26 +12,27 @@ edgeRatio:      Determines the width of the top or right edge compared to the bo
                 Cannot be less than 0. 
                 < 1 results in top or right edge shorter than bottom or left edge. 
                 > 1 results in top or right edge longer than bottom or left edge.
-ratioDirection: Determines if the edgeRatio is between the top and bottom edges or the left and right edges.
-                Options are .vertical (default) or .horizontal.
-lineOffset:     Determines how acute the trapezoid is. 
+flexibleEdge:   Determines which base is "flexible." 
+                Options are .top (default), .right, .bottom, .left
+                The flexible edge is the edge which will grow or shrink based on the edgeRatio; and be offset by the edgeOffset.
+edgeOffset:     Determines how acute the trapezoid is. 
                 Defaults to 0 for isosceles trapezoid.
 ```
 
 RoundedTrapezoids can be initialized in the following ways:
 
 ```swift
-// Defaults cornerOffset to 10, edgeRatio to 0.65, ratioDirection to .vertical, lineOffset to 0. 
+// Defaults cornerOffset to 10, edgeRatio to 0.65, flexibleEdge to .top, edgeOffset to 0. 
 RoundedTrapezoid()
 
-// Provide the cornerOffset. Defaults edgeRatio to 0.65, ratioDirection to .vertical, lineOffset to 0.
+// Provide the cornerOffset. Defaults edgeRatio to 0.65, flexibleEdge to .top, edgeOffset to 0.
 RoundedTrapezoid(cornerOffset: Double)
 
-// Provide the cornerOffset and edgeRatio. Defaults ratioDirection to .vertical, lineOffset is set to 0.
+// Provide the cornerOffset and edgeRatio. Defaults flexibleEdge to .top, edgeOffset is set to 0.
 RoundedTrapezoid(cornerOffset: Double, edgeRatio: Double)
  
 // Provide cornerOffset and any of the other 3 properties in any combination. The defaults are as above. You can provide settings for all or some.
-RoundedTrapezoid(cornerOffset: Double, edgeRatio: Double, ratioDirection: RatioDirection, lineOffset: Double)
+RoundedTrapezoid(cornerOffset: Double, edgeRatio: Double, flexibleEdge: FlexibleEdge, edgeOffset: Double)
 ```
 
 The RoundedTrapezoid cannot be obtuse, unless the cornerOffset = 0.
