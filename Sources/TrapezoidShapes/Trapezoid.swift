@@ -5,21 +5,25 @@ public struct Trapezoid: Shape {
     private let topEdgeRatio: Double
     private let topLineOffset: Double
     private let insetAmount: CGFloat
+    private let ratioDirection: RatioDirection
     
     public init() {
         self.topEdgeRatio = 0.65
         self.topLineOffset = 0
         self.insetAmount = 0.0
+        self.ratioDirection = .vertical
     }
     
-    public init(edgeRatio: Double, lineOffset: Double = 0) {
+    public init(edgeRatio: Double, ratioDirection: RatioDirection = .vertical, lineOffset: Double = 0) {
         self.topEdgeRatio = edgeRatio
+        self.ratioDirection = ratioDirection
         self.topLineOffset = lineOffset
         self.insetAmount = 0.0
     }
     
-    init(edgeRatio: Double, lineOffset: Double = 0, inset: CGFloat = 0.0) {
+    init(edgeRatio: Double, ratioDirection: RatioDirection = .vertical, lineOffset: Double = 0, inset: CGFloat = 0.0) {
         self.topEdgeRatio = edgeRatio
+        self.ratioDirection = ratioDirection
         self.topLineOffset = lineOffset
         self.insetAmount = 0.0
     }
@@ -27,9 +31,16 @@ public struct Trapezoid: Shape {
     public func path(in rect: CGRect) -> Path {
         Path.roundedTrapezoid(in: rect,
                               topEdgeRatio: self.topEdgeRatio,
+                              ratioVertical: ratioDirection == .vertical,
                               topLineOffset: self.topLineOffset,
                               cornerOffset: 0,
                               insetAmount: self.insetAmount)
+    }
+    
+    
+    public enum RatioDirection {
+        case horizontal
+        case vertical
     }
 }
 
@@ -57,7 +68,7 @@ struct Trapezoid_Previews: PreviewProvider {
                     .background(Rectangle().foregroundColor(.white))
                     .previewLayout(.fixed(width: frameWidth, height: frameHeight))
                 
-                Trapezoid(edgeRatio: 0.35)
+                Trapezoid(edgeRatio: 0.35, ratioDirection: .horizontal)
                     .foregroundColor(.red)
                     .padding()
                     .background(Rectangle().foregroundColor(.white))
