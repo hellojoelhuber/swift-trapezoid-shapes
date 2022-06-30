@@ -1,18 +1,20 @@
 import SwiftUI
 
 public struct RoundedTrapezoid: Shape {
-    private let topEdgeRatio: Double
     private let cornerOffset: Double
+    private let topEdgeRatio: Double
+    private let ratioDirection: RatioDirection
     private let topLineOffset: Double
     private let insetAmount: CGFloat
-    private let ratioDirection: RatioDirection
+    
     
     public init() {
-        self.topEdgeRatio = 0.65
         self.cornerOffset = 10
+        self.topEdgeRatio = 0.65
+        self.ratioDirection = .vertical
         self.topLineOffset = 0
         self.insetAmount = 0.0
-        self.ratioDirection = .vertical
+        
     }
     
     public init(cornerOffset: Double, edgeRatio: Double = 0.65, ratioDirection: RatioDirection = .vertical, lineOffset: Double = 0) {
