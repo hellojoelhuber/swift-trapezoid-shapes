@@ -2,53 +2,67 @@
 import SwiftUI
 
 public struct Trapezoid: Shape {
-    private let topEdgeRatio: Double
-    private let topLineOffset: Double
+    private let flexibleEdgeRatio: Double
+    private let flexibleEdge: FlexibleSide
+    private let flexibleEdgeOffset: Double
     private let insetAmount: CGFloat
-    private let ratioDirection: RatioDirection
     
     public init() {
-        self.topEdgeRatio = 0.65
-        self.topLineOffset = 0
-        self.insetAmount = 0.0
-        self.ratioDirection = .vertical
-    }
-    
-    public init(edgeRatio: Double, ratioDirection: RatioDirection = .vertical, lineOffset: Double = 0) {
-        self.topEdgeRatio = edgeRatio
-        self.ratioDirection = ratioDirection
-        self.topLineOffset = lineOffset
+        self.flexibleEdgeRatio = 0.65
+        self.flexibleEdge = .top
+        self.flexibleEdgeOffset = 0
         self.insetAmount = 0.0
     }
     
-    init(edgeRatio: Double, ratioDirection: RatioDirection = .vertical, lineOffset: Double = 0, inset: CGFloat = 0.0) {
-        self.topEdgeRatio = edgeRatio
-        self.ratioDirection = ratioDirection
-        self.topLineOffset = lineOffset
+    public init(edgeRatio: Double, flexibleEdge: FlexibleSide = .top, lineOffset: Double = 0) {
+        self.flexibleEdgeRatio = edgeRatio
+        self.flexibleEdge = flexibleEdge
+        self.flexibleEdgeOffset = lineOffset
+        self.insetAmount = 0.0
+    }
+    
+    init(edgeRatio: Double, flexibleEdge: FlexibleSide = .top, lineOffset: Double = 0, inset: CGFloat = 0.0) {
+        self.flexibleEdgeRatio = edgeRatio
+        self.flexibleEdge = flexibleEdge
+        self.flexibleEdgeOffset = lineOffset
         self.insetAmount = 0.0
     }
     
     public func path(in rect: CGRect) -> Path {
-        Path.roundedTrapezoid(in: rect,
-                              topEdgeRatio: self.topEdgeRatio,
-                              ratioVertical: ratioDirection == .vertical,
-                              topLineOffset: self.topLineOffset,
-                              cornerOffset: 0,
-                              insetAmount: self.insetAmount)
+        let initialSideId = { () -> Int in
+            switch self.flexibleEdge {
+            case .top:
+                return 0
+            case .right:
+                return 1
+            case .bottom:
+                return 2
+            case .left:
+                return 3
+            }
+        }
+        return Path.roundedTrapezoid(in: rect,
+                                     flexibleEdgeRatio: self.flexibleEdgeRatio,
+                                     initialSide: initialSideId(),
+                                     topLineOffset: self.flexibleEdgeOffset,
+                                     cornerOffset: 0,
+                                     insetAmount: self.insetAmount)
     }
     
     
-    public enum RatioDirection {
-        case horizontal
-        case vertical
+    public enum FlexibleSide {
+        case top
+        case right
+        case bottom
+        case left
     }
 }
 
 @available(macOS 10.15, *)
 extension Trapezoid: InsettableShape {
     public func inset(by amount: CGFloat) -> Trapezoid {
-        Trapezoid(edgeRatio: self.topEdgeRatio,
-                  lineOffset: self.topLineOffset,
+        Trapezoid(edgeRatio: self.flexibleEdgeRatio,
+                  lineOffset: self.flexibleEdgeOffset,
                   inset: self.insetAmount + amount)
     }
 }
@@ -68,7 +82,7 @@ struct Trapezoid_Previews: PreviewProvider {
                     .background(Rectangle().foregroundColor(.white))
                     .previewLayout(.fixed(width: frameWidth, height: frameHeight))
                 
-                Trapezoid(edgeRatio: 0.35, ratioDirection: .horizontal)
+                Trapezoid(edgeRatio: 0.35, flexibleEdge: .left)
                     .foregroundColor(.red)
                     .padding()
                     .background(Rectangle().foregroundColor(.white))
