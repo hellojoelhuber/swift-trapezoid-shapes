@@ -29,32 +29,12 @@ public struct Trapezoid: Shape {
     }
     
     public func path(in rect: CGRect) -> Path {
-        let initialSideId = { () -> Int in
-            switch self.flexibleEdge {
-            case .top:
-                return 0
-            case .right:
-                return 1
-            case .bottom:
-                return 2
-            case .left:
-                return 3
-            }
-        }
-        return Path.roundedTrapezoid(in: rect,
-                                     flexibleEdgeRatio: self.flexibleEdgeRatio,
-                                     initialSide: initialSideId(),
-                                     topLineOffset: self.flexibleEdgeOffset,
-                                     cornerOffset: 0,
-                                     insetAmount: self.insetAmount)
-    }
-    
-    
-    public enum FlexibleEdge {
-        case top
-        case right
-        case bottom
-        case left
+        Path.roundedTrapezoid(in: rect,
+                              flexibleEdgeRatio: self.flexibleEdgeRatio,
+                              flexibleEdge: self.flexibleEdge,
+                              topLineOffset: self.flexibleEdgeOffset,
+                              cornerRadius: 0,
+                              insetAmount: self.insetAmount)
     }
 }
 

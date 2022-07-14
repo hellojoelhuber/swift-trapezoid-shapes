@@ -3,7 +3,7 @@ import XCTest
 
 final class TrapezoidShapesTests: XCTestCase {
     func test_RoundedTrapezoid_init() throws {
-        XCTAssertEqual(RoundedTrapezoid().cornerOffset, 10)
+        XCTAssertEqual(RoundedTrapezoid().cornerRadius, 10)
         XCTAssertEqual(RoundedTrapezoid().flexibleEdgeRatio, 0.65)
         XCTAssertEqual(RoundedTrapezoid().flexibleEdge, .top)
         XCTAssertEqual(RoundedTrapezoid().flexibleEdgeOffset, 0)
